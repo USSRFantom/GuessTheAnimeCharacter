@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        GameLevels.numberOfPositionsSolved = 1;
     }
 
 }
