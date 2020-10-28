@@ -17,9 +17,18 @@ import java.util.logging.Level;
 public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.LevelsViewHolder> {
 
     private ArrayList<Levels> levels;
+    private OnImageClickListener onImageClickListener;
 
     public LevelsAdapter(ArrayList<Levels> levels) {
         this.levels = levels;
+    }
+
+    interface OnImageClickListener{
+        void onImageClick(int position);
+    }
+
+    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
+        this.onImageClickListener = onImageClickListener;
     }
 
     @NonNull
@@ -34,7 +43,6 @@ public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.LevelsView
         Levels levelss = levels.get(position);
         ImageView imageView = notesViewHolder.imageViewLevels;
         Picasso.get().load(levelss.getImage()).into(imageView);
-        System.out.println(levelss.getImage() + " " + "<====================================");
     }
 
     @Override
@@ -51,6 +59,14 @@ public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.LevelsView
         public LevelsViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewLevels = itemView.findViewById(R.id.imageViewLevels);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onImageClickListener != null){
+                        onImageClickListener.onImageClick(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

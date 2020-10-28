@@ -4,4 +4,8 @@
     <string name="image_level">Картинка уровня</string>
     <string name="back">Назад</string>
     <string name="text_select_level">Выберите уровень</string>
+    <string name="Level">Уровень:</string>
+    <string name="answer_1">Ответ 1</string>
+    <string name="answer_2">Ответ 2</string>
+    <string name="answer_3">Ответ 3</string>
 </resources>

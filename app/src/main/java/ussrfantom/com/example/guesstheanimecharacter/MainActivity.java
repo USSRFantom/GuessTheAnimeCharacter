@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageViewStart;
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,22 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        GameLevels.numberOfPositionsSolved = 1;
+        GameLevels.numberOfPositionsSolved = 4;
     }
 
+    //Системная кнопка назад, выход из уровня при двойном клике
+
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()){
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        }else{
+            backToast = Toast.makeText(getBaseContext(), "Нажмите еще раз чтобы выйти", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 }
