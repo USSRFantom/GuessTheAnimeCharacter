@@ -8,12 +8,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class PlayLevel extends AppCompatActivity {
 
@@ -30,10 +34,10 @@ public class PlayLevel extends AppCompatActivity {
         setContentView(R.layout.activity_play_level);
         Button buttonBack = findViewById(R.id.button_back);
         button0 = findViewById(R.id.button_answer1);
-        button0 = findViewById(R.id.button_answer2);
-        button0 = findViewById(R.id.button_answer3);
+        button1 = findViewById(R.id.button_answer2);
+        button2 = findViewById(R.id.button_answer3);
         imageViewСharacter = findViewById(R.id.image_character);
-        RetrievingData.getContent();
+
 
 
 
@@ -78,7 +82,6 @@ public class PlayLevel extends AppCompatActivity {
             }
         });
 
-
     }
 
     //системная кнопка назад.
@@ -92,7 +95,4 @@ public class PlayLevel extends AppCompatActivity {
 
         }
     }
-
-
-
 }
