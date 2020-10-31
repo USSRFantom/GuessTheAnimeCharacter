@@ -51,7 +51,6 @@ public class GameLevels extends AppCompatActivity {
         adapter.setOnImageClickListener(new LevelsAdapter.OnImageClickListener() {
             @Override
             public void onImageClick(int position) {
-                Toast.makeText(GameLevels.this, "Click " + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(GameLevels.this, PlayLevel.class);
                 intent.putExtra("msg", position);
                 startActivity(intent);

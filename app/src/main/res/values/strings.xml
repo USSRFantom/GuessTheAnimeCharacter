@@ -12,6 +12,7 @@
     <string name="proceed">продолжить</string>
     
     <string name="level1">Уровень: 1</string>
+    <string name="character">Персонаж</string>
     <string-array name="levels">
         <item>Урвоень 1</item>
         <item>Урвоень 2</item>
@@ -33,6 +34,9 @@
         <item>Урвоень 18</item>
         <item>Урвоень 19</item>
         <item>Урвоень 20</item>
+
+    </string-array>
+    <string-array name="image_the_character">
 
     </string-array>
 </resources>

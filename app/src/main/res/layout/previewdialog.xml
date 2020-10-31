@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:layout_margin="10dp"
             android:text="@string/dialog" />
         </ScrollView>
         <Button
@@ -40,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/proceed"
+            android:layout_margin="10dp"
             android:background="@drawable/style_btn_stroke_black95_press_white"/>
     </LinearLayout>
 </LinearLayout>

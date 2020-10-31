@@ -12,18 +12,31 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PlayLevel extends AppCompatActivity {
 
     Dialog dialogStart;
     private int positionLevel;
+    private Button button0;
+    private Button button1;
+    private Button button2;
+    private ImageView imageViewСharacter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_level);
         Button buttonBack = findViewById(R.id.button_back);
+        button0 = findViewById(R.id.button_answer1);
+        button0 = findViewById(R.id.button_answer2);
+        button0 = findViewById(R.id.button_answer3);
+        imageViewСharacter = findViewById(R.id.image_character);
+        RetrievingData.getContent();
+
+
+
         //убираем системное меню, едлаем его выдвижным
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
