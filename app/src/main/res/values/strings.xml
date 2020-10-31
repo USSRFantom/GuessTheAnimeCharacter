@@ -8,4 +8,31 @@
     <string name="answer_1">Ответ 1</string>
     <string name="answer_2">Ответ 2</string>
     <string name="answer_3">Ответ 3</string>
+    <string name="dialog">Задание простое, отгадай всех персонажей и перейдешь на следующий уровень. Еденицы могут пройти это игру! Надеюсь ты не сдашься и пройдешь ее. Удачи!</string>
+    <string name="proceed">продолжить</string>
+    
+    <string name="level1">Уровень: 1</string>
+    <string-array name="levels">
+        <item>Урвоень 1</item>
+        <item>Урвоень 2</item>
+        <item>Урвоень 3</item>
+        <item>Урвоень 4</item>
+        <item>Урвоень 5</item>
+        <item>Урвоень 6</item>
+        <item>Урвоень 7</item>
+        <item>Урвоень 8</item>
+        <item>Урвоень 9</item>
+        <item>Урвоень 10</item>
+        <item>Урвоень 11</item>
+        <item>Урвоень 12</item>
+        <item>Урвоень 13</item>
+        <item>Урвоень 14</item>
+        <item>Урвоень 15</item>
+        <item>Урвоень 16</item>
+        <item>Урвоень 17</item>
+        <item>Урвоень 18</item>
+        <item>Урвоень 19</item>
+        <item>Урвоень 20</item>
+
+    </string-array>
 </resources>

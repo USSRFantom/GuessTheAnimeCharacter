@@ -35,7 +35,7 @@ public class GameLevels extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //заполнение массива
-        for (int i = 0; i <=50; i++){
+        for (int i = 0; i <=19; i++){
             if(i < numberOfPositionsSolved){
                 levels.add(new Levels("https://a.radikal.ru/a35/2010/68/d2934cfdd690.jpg"));
             }else{
@@ -53,6 +53,7 @@ public class GameLevels extends AppCompatActivity {
             public void onImageClick(int position) {
                 Toast.makeText(GameLevels.this, "Click " + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(GameLevels.this, PlayLevel.class);
+                intent.putExtra("msg", position);
                 startActivity(intent);
                 finish();
             }
