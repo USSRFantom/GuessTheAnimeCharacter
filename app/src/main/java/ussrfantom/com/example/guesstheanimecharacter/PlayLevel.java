@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 public class PlayLevel extends AppCompatActivity {
 
@@ -27,6 +24,12 @@ public class PlayLevel extends AppCompatActivity {
     private Button button1;
     private Button button2;
     private ImageView imageViewСharacter;
+    private String [] stringImg;
+    private String [] stringAnswerTrue;
+    private String [] stringWrongAnswerOne;
+    private String [] stringWrongAnswerTwo;
+    int level;
+    int startAnswerArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,10 @@ public class PlayLevel extends AppCompatActivity {
         button1 = findViewById(R.id.button_answer2);
         button2 = findViewById(R.id.button_answer3);
         imageViewСharacter = findViewById(R.id.image_character);
-
-
-
+        stringImg = getResources().getStringArray(R.array.image_the_character);
+        stringAnswerTrue = getResources().getStringArray(R.array.true_answer);
+        stringWrongAnswerOne  = getResources().getStringArray(R.array.wrong_answer_one);
+        stringWrongAnswerTwo  = getResources().getStringArray(R.array.wrong_answer_two);
 
         //убираем системное меню, едлаем его выдвижным
         Window w = getWindow();
@@ -51,6 +55,11 @@ public class PlayLevel extends AppCompatActivity {
         String[] textLevel = getResources().getStringArray(R.array.levels);
         TextView textViewLevels = findViewById(R.id.text_levels);
         textViewLevels.setText(textLevel[positionLevel]);
+        level = positionLevel;
+
+        //проверяем, с какими элементами массива мы работаем исходя из уровня
+        startAnswerArray = 0;
+        startAnswerArray = level * 20;
 
 
         //нажатие на кнопку назад
@@ -82,6 +91,7 @@ public class PlayLevel extends AppCompatActivity {
             }
         });
 
+        PlayGame();
     }
 
     //системная кнопка назад.
@@ -94,5 +104,40 @@ public class PlayLevel extends AppCompatActivity {
         }catch (Exception e){
 
         }
+    }
+
+    public void PlayGame(){
+        Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+        int random_number1 = 1 + (int) (Math.random() * 3);
+
+        switch (random_number1){
+            case (1) :
+                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                button0.setText(stringAnswerTrue[startAnswerArray]);
+                button1.setText(stringWrongAnswerOne[startAnswerArray]);
+                button2.setText(stringWrongAnswerTwo[startAnswerArray]);
+                startAnswerArray++;
+                break;
+            case (2) :
+                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                button1.setText(stringAnswerTrue[startAnswerArray]);
+                button2.setText(stringWrongAnswerOne[startAnswerArray]);
+                button0.setText(stringWrongAnswerTwo[startAnswerArray]);
+                startAnswerArray++;
+                break;
+
+            case (3) :
+                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                button2.setText(stringAnswerTrue[startAnswerArray]);
+                button0.setText(stringWrongAnswerOne[startAnswerArray]);
+                button1.setText(stringWrongAnswerTwo[startAnswerArray]);
+                startAnswerArray++;
+                break;
+        }
+
+
+
+
+
     }
 }
