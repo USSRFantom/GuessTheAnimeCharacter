@@ -27,12 +27,19 @@ public class MainActivity extends AppCompatActivity {
         imageViewStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (GameLevels.numberOfPositionsSolved == 0){
+                    Intent intent = new Intent(MainActivity.this, GameLevels.class);
+                    GameLevels.numberOfPositionsSolved++;
+                    startActivity(intent);
+                }else{
                 Intent intent = new Intent(MainActivity.this, GameLevels.class);
                 startActivity(intent);
                 finish();
             }
+            }
         });
-        GameLevels.numberOfPositionsSolved = 4;
+
+
     }
 
     //Системная кнопка назад, выход из уровня при двойном клике

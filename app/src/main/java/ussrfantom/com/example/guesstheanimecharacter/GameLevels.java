@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class GameLevels extends AppCompatActivity {
     private RecyclerView recyclerViewLevels;
     private ArrayList <Levels> levels = new ArrayList<>();
     public static int numberOfPositionsSolved; //колличество решенных уровней
+    private int truAnswerLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +31,47 @@ public class GameLevels extends AppCompatActivity {
         recyclerViewLevels = findViewById(R.id.recyclerViewLevels);
         Button buttonBack = findViewById(R.id.buttonBack);
 
-
         //убираем системное меню, едлаем его выдвижным
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
         //заполнение массива
-        for (int i = 0; i <=19; i++){
+
+               for (int i = 0; i <=19; i++) {
+
+                   if (numberOfPositionsSolved - 2 >= i) {
+                       levels.add(new Levels("https://c.radikal.ru/c10/2011/12/38b82a8df6fc.jpg"));
+                   }
+
+                   if(numberOfPositionsSolved - 1 == i){
+                       levels.add(new Levels("https://a.radikal.ru/a35/2010/68/d2934cfdd690.jpg"));
+                   }
+                   if(numberOfPositionsSolved <= i){
+                       levels.add(new Levels("https://c.radikal.ru/c29/2010/db/7aeff8e7ddfa.jpg"));
+                   }
+
+               }
+
+
+
+
+
+
+
+
+      /*  for (int i = 0; i <=19; i++){
             if(i < numberOfPositionsSolved){
+
+                levels.add(new Levels("https://c.radikal.ru/c10/2011/12/38b82a8df6fc.jpg"));
+
+
                 levels.add(new Levels("https://a.radikal.ru/a35/2010/68/d2934cfdd690.jpg"));
             }else{
                 levels.add(new Levels("https://c.radikal.ru/c29/2010/db/7aeff8e7ddfa.jpg"));
             }
         }
+        */
 
 
             //создаем адаптер и кладем в него массив + разметка+ ресайклер вью для отображения адаптера в нужном колличестве указанном в разметве
@@ -52,7 +82,9 @@ public class GameLevels extends AppCompatActivity {
             @Override
             public void onImageClick(int position) {
                 Intent intent = new Intent(GameLevels.this, PlayLevel.class);
-                intent.putExtra("msg", position);
+                int a = position++;
+                intent.putExtra("msg", a);
+                System.out.println("Передаем позицию " + a);
                 startActivity(intent);
                 finish();
             }

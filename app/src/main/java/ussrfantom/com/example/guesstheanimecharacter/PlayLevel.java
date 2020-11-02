@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,13 +14,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 public class PlayLevel extends AppCompatActivity {
 
     Dialog dialogStart;
+    Dialog dialogT;
+    Dialog dialogF;
     private int positionLevel;
+    private String positionLevelString;
     private Button button0;
     private Button button1;
     private Button button2;
@@ -30,6 +35,8 @@ public class PlayLevel extends AppCompatActivity {
     private String [] stringWrongAnswerTwo;
     int level;
     int startAnswerArray;
+    public int count = 0; //счетчик для выхода из уровня
+    public int countTrueAnswer = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +58,21 @@ public class PlayLevel extends AppCompatActivity {
 
         //получаем данные о уровне из прошлой активности и пользуемся ими
         Intent intent = getIntent();
-        positionLevel = intent.getIntExtra("msg", positionLevel);
+        positionLevelString = intent.getStringExtra("msg");
         String[] textLevel = getResources().getStringArray(R.array.levels);
         TextView textViewLevels = findViewById(R.id.text_levels);
-        textViewLevels.setText(textLevel[positionLevel]);
-        level = positionLevel;
+        textViewLevels.setText(textLevel[GameLevels.numberOfPositionsSolved - 1]);
+        level = GameLevels.numberOfPositionsSolved - 1;
+        System.out.println("На момент старта переменная имеет значение level " + level);
+        System.out.println("На момент старта переменная имеет значение positionLevel " + positionLevel);
 
         //проверяем, с какими элементами массива мы работаем исходя из уровня
         startAnswerArray = 0;
         startAnswerArray = level * 20;
+
+        //массив для прогресса игры
+        final int[] progress = {R.id.point1,R.id.point2,R.id.point3,R.id.point4,R.id.point5,R.id.point6,R.id.point7,R.id.point8,R.id.point9,R.id.point10,R.id.point11,R.id.point12,R.id.point13,
+                R.id.point14,R.id.point15,R.id.point16,R.id.point17,R.id.point18,R.id.point19,R.id.point20};
 
 
         //нажатие на кнопку назад
@@ -92,7 +105,73 @@ public class PlayLevel extends AppCompatActivity {
         });
 
         PlayGame();
+
+
+        //нажатие на кнопку 1
+        button0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button0.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
+                    Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
+                        TextView tv = findViewById(progress[startAnswerArray - 1]);
+                        tv.setBackgroundResource(R.drawable.style_points_green);
+                    countTrueAnswer++;
+                    PlayGame();
+                }else{
+                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    tv.setBackgroundResource(R.drawable.style_points_red);
+                    Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
+                    PlayGame();
+                }
+            }
+        });
+
+        //нажатие на кнопку 2
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button1.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
+                    Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
+                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    tv.setBackgroundResource(R.drawable.style_points_green);
+                    countTrueAnswer++;
+                    PlayGame();
+                }else{
+                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    tv.setBackgroundResource(R.drawable.style_points_red);
+                    Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
+                    PlayGame();
+                }
+            }
+        });
+
+        //нажатие на кнопку 1
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button2.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
+                    Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
+                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    tv.setBackgroundResource(R.drawable.style_points_green);
+                    countTrueAnswer++;
+                    PlayGame();
+                }else{
+                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    tv.setBackgroundResource(R.drawable.style_points_red);
+                    Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
+                    PlayGame();
+                }
+            }
+        });
+
+
+
     }
+
+
+
+
+
 
     //системная кнопка назад.
     @Override
@@ -106,38 +185,81 @@ public class PlayLevel extends AppCompatActivity {
         }
     }
 
+
+    //Метод простановки вопросов и ответов
     public void PlayGame(){
-        Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
-        int random_number1 = 1 + (int) (Math.random() * 3);
+        if (count <20) {
+            int random_number1 = 1 + (int) (Math.random() * 3);
+            switch (random_number1) {
+                case (1):
+                    Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                    button0.setText(stringAnswerTrue[startAnswerArray]);
+                    button1.setText(stringWrongAnswerOne[startAnswerArray]);
+                    button2.setText(stringWrongAnswerTwo[startAnswerArray]);
+                    startAnswerArray++;
+                    count++;
+                    break;
+                case (2):
+                    Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                    button1.setText(stringAnswerTrue[startAnswerArray]);
+                    button2.setText(stringWrongAnswerOne[startAnswerArray]);
+                    button0.setText(stringWrongAnswerTwo[startAnswerArray]);
+                    startAnswerArray++;
+                    count++;
+                    break;
 
-        switch (random_number1){
-            case (1) :
-                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
-                button0.setText(stringAnswerTrue[startAnswerArray]);
-                button1.setText(stringWrongAnswerOne[startAnswerArray]);
-                button2.setText(stringWrongAnswerTwo[startAnswerArray]);
-                startAnswerArray++;
-                break;
-            case (2) :
-                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
-                button1.setText(stringAnswerTrue[startAnswerArray]);
-                button2.setText(stringWrongAnswerOne[startAnswerArray]);
-                button0.setText(stringWrongAnswerTwo[startAnswerArray]);
-                startAnswerArray++;
-                break;
+                case (3):
+                    Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
+                    button2.setText(stringAnswerTrue[startAnswerArray]);
+                    button0.setText(stringWrongAnswerOne[startAnswerArray]);
+                    button1.setText(stringWrongAnswerTwo[startAnswerArray]);
+                    startAnswerArray++;
+                    count++;
+                    break;
+            }
+        }else{
+            if (countTrueAnswer >=16){
+                Toast.makeText(this, "ПОБЕДА!", Toast.LENGTH_LONG).show();
+                //Диалоговое окно стартовое
+                dialogT = new Dialog(this);
+                dialogT.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogT.setContentView(R.layout.dialogendt);
+                dialogT.show();
 
-            case (3) :
-                Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
-                button2.setText(stringAnswerTrue[startAnswerArray]);
-                button0.setText(stringWrongAnswerOne[startAnswerArray]);
-                button1.setText(stringWrongAnswerTwo[startAnswerArray]);
-                startAnswerArray++;
-                break;
+                //кнопка продолжить
+                Button buttoncomtinue1 = dialogT.findViewById(R.id.buttonContinue);
+                buttoncomtinue1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogT.dismiss();
+                        Intent intent = new Intent(PlayLevel.this, GameLevels.class);
+                        GameLevels.numberOfPositionsSolved++;
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+            }else{
+                Toast.makeText(this, "Слишком мало правильных ответов! Нужно не менее 17! Правильных ответов " + countTrueAnswer , Toast.LENGTH_LONG).show();
+                //Диалоговое окно стартовое
+                dialogF = new Dialog(this);
+                dialogF.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogF.setContentView(R.layout.dialogendf);
+                dialogF.show();
+
+                //кнопка продолжить
+                Button buttoncomtinue2 = dialogF.findViewById(R.id.buttonContinue);
+                buttoncomtinue2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogF.dismiss();
+                        Intent intent = new Intent(PlayLevel.this, GameLevels.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+            }
         }
-
-
-
-
-
     }
 }
