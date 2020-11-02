@@ -3,6 +3,7 @@ package ussrfantom.com.example.guesstheanimecharacter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageViewStart;
     private long backPressedTime;
     private Toast backToast;
+    SharedPreferences sPref;
+    final String SAVE_INT = "save_int";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        loadInt();
 
         imageViewStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
+
+
 
     //Системная кнопка назад, выход из уровня при двойном клике
 
@@ -56,5 +64,27 @@ public class MainActivity extends AppCompatActivity {
             backToast.show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+
+
+
+    public void saveInt(){
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt(SAVE_INT, GameLevels.numberOfPositionsSolved);
+        ed.commit();
+        Toast.makeText(this, "Сохранили "  + GameLevels.numberOfPositionsSolved,  Toast.LENGTH_SHORT).show();
+    }
+
+    public void loadInt () {
+        sPref = getPreferences(MODE_PRIVATE);
+        GameLevels.numberOfPositionsSolved= sPref.getInt(SAVE_INT, 0);
+        Toast.makeText(this, "Достали " + GameLevels.numberOfPositionsSolved, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveInt();
     }
 }

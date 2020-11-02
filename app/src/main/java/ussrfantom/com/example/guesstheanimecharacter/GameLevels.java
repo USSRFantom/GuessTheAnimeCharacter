@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -81,14 +82,18 @@ public class GameLevels extends AppCompatActivity {
         adapter.setOnImageClickListener(new LevelsAdapter.OnImageClickListener() {
             @Override
             public void onImageClick(int position) {
-                Intent intent = new Intent(GameLevels.this, PlayLevel.class);
-                int a = position++;
-                intent.putExtra("msg", a);
-                System.out.println("Передаем позицию " + a);
-                startActivity(intent);
-                finish();
+                if (numberOfPositionsSolved -1 == position){
+                    Intent intent = new Intent(GameLevels.this, PlayLevel.class);
+                    int a = position++;
+                    intent.putExtra("msg", a);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(GameLevels.this, "Уровень закрыт!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         //нажатие на кнопку назад
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -116,5 +121,4 @@ public class GameLevels extends AppCompatActivity {
 
         }
     }
-
 }

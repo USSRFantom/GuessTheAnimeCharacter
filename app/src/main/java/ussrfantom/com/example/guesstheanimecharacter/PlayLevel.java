@@ -37,6 +37,7 @@ public class PlayLevel extends AppCompatActivity {
     int startAnswerArray;
     public int count = 0; //счетчик для выхода из уровня
     public int countTrueAnswer = 0;
+    int pointsColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class PlayLevel extends AppCompatActivity {
         //проверяем, с какими элементами массива мы работаем исходя из уровня
         startAnswerArray = 0;
         startAnswerArray = level * 20;
+        pointsColor = 0;
 
         //массив для прогресса игры
         final int[] progress = {R.id.point1,R.id.point2,R.id.point3,R.id.point4,R.id.point5,R.id.point6,R.id.point7,R.id.point8,R.id.point9,R.id.point10,R.id.point11,R.id.point12,R.id.point13,
@@ -113,12 +115,12 @@ public class PlayLevel extends AppCompatActivity {
             public void onClick(View v) {
                 if (button0.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
                     Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
-                        TextView tv = findViewById(progress[startAnswerArray - 1]);
+                        TextView tv = findViewById(progress[pointsColor - 1]);
                         tv.setBackgroundResource(R.drawable.style_points_green);
                     countTrueAnswer++;
                     PlayGame();
                 }else{
-                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    TextView tv = findViewById(progress[pointsColor - 1]);
                     tv.setBackgroundResource(R.drawable.style_points_red);
                     Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
                     PlayGame();
@@ -132,12 +134,12 @@ public class PlayLevel extends AppCompatActivity {
             public void onClick(View v) {
                 if (button1.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
                     Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
-                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    TextView tv = findViewById(progress[pointsColor - 1]);
                     tv.setBackgroundResource(R.drawable.style_points_green);
                     countTrueAnswer++;
                     PlayGame();
                 }else{
-                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    TextView tv = findViewById(progress[pointsColor - 1]);
                     tv.setBackgroundResource(R.drawable.style_points_red);
                     Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
                     PlayGame();
@@ -151,12 +153,12 @@ public class PlayLevel extends AppCompatActivity {
             public void onClick(View v) {
                 if (button2.getText().toString().equals(stringAnswerTrue[startAnswerArray - 1])){
                     Toast.makeText(PlayLevel.this, "ВЕРНО!", Toast.LENGTH_SHORT).show();
-                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    TextView tv = findViewById(progress[pointsColor - 1]);
                     tv.setBackgroundResource(R.drawable.style_points_green);
                     countTrueAnswer++;
                     PlayGame();
                 }else{
-                    TextView tv = findViewById(progress[startAnswerArray - 1]);
+                    TextView tv = findViewById(progress[pointsColor - 1]);
                     tv.setBackgroundResource(R.drawable.style_points_red);
                     Toast.makeText(PlayLevel.this, "Ошибка! " + "Правльный ответ " + stringAnswerTrue[startAnswerArray -1], Toast.LENGTH_SHORT).show();
                     PlayGame();
@@ -198,6 +200,7 @@ public class PlayLevel extends AppCompatActivity {
                     button2.setText(stringWrongAnswerTwo[startAnswerArray]);
                     startAnswerArray++;
                     count++;
+                    pointsColor++;
                     break;
                 case (2):
                     Picasso.get().load(stringImg[startAnswerArray]).into(imageViewСharacter);
@@ -206,6 +209,7 @@ public class PlayLevel extends AppCompatActivity {
                     button0.setText(stringWrongAnswerTwo[startAnswerArray]);
                     startAnswerArray++;
                     count++;
+                    pointsColor++;
                     break;
 
                 case (3):
@@ -215,6 +219,7 @@ public class PlayLevel extends AppCompatActivity {
                     button1.setText(stringWrongAnswerTwo[startAnswerArray]);
                     startAnswerArray++;
                     count++;
+                    pointsColor++;
                     break;
             }
         }else{
