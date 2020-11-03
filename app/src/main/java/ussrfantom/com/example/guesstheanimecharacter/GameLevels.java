@@ -38,7 +38,6 @@ public class GameLevels extends AppCompatActivity {
 
 
         //заполнение массива
-
                for (int i = 0; i <=19; i++) {
 
                    if (numberOfPositionsSolved - 2 >= i) {
@@ -53,28 +52,6 @@ public class GameLevels extends AppCompatActivity {
                    }
 
                }
-
-
-
-
-
-
-
-
-      /*  for (int i = 0; i <=19; i++){
-            if(i < numberOfPositionsSolved){
-
-                levels.add(new Levels("https://c.radikal.ru/c10/2011/12/38b82a8df6fc.jpg"));
-
-
-                levels.add(new Levels("https://a.radikal.ru/a35/2010/68/d2934cfdd690.jpg"));
-            }else{
-                levels.add(new Levels("https://c.radikal.ru/c29/2010/db/7aeff8e7ddfa.jpg"));
-            }
-        }
-        */
-
-
             //создаем адаптер и кладем в него массив + разметка+ ресайклер вью для отображения адаптера в нужном колличестве указанном в разметве
         LevelsAdapter adapter = new LevelsAdapter(levels);
         recyclerViewLevels.setLayoutManager(new GridLayoutManager(this, 4));

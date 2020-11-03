@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor ed = sPref.edit();
         ed.putInt(SAVE_INT, GameLevels.numberOfPositionsSolved);
         ed.commit();
-        Toast.makeText(this, "Сохранили "  + GameLevels.numberOfPositionsSolved,  Toast.LENGTH_SHORT).show();
     }
 
     public void loadInt () {

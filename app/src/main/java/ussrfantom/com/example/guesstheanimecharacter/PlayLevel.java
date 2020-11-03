@@ -231,16 +231,26 @@ public class PlayLevel extends AppCompatActivity {
                 dialogT.setContentView(R.layout.dialogendt);
                 dialogT.show();
 
+
+
+
+
                 //кнопка продолжить
                 Button buttoncomtinue1 = dialogT.findViewById(R.id.buttonContinue);
                 buttoncomtinue1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialogT.dismiss();
-                        Intent intent = new Intent(PlayLevel.this, GameLevels.class);
-                        GameLevels.numberOfPositionsSolved++;
-                        startActivity(intent);
-                        finish();
+                        if (GameLevels.numberOfPositionsSolved == 19) {
+                            Intent intent = new Intent(PlayLevel.this, FinishGame.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Intent intent = new Intent(PlayLevel.this, GameLevels.class);
+                            GameLevels.numberOfPositionsSolved++;
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 });
 
